@@ -39,12 +39,33 @@ addtarefa.addEventListener("click", () =>{
 
     let exibicao = document.getElementById("tarefasatuais");
 
-    for(n of lista)  {
+    for(const [indice, valor] of lista.entries())  {
 
-        exibicao.innerHTML("oi");
+        const div = document.createElement("div");
+
+        div.textContent = ("Minhas Tarefas");
+
+        div.classList("tarefa");
+
+        const numeracao = document.createElement("p");
+
+        numeracao.textContent = (indice);
+
+        data-index = indice;
+
+        const exibirtarefa = document.createElement ("p");
+
+        exibirtarefa.textContent = (valor);
+
+        const botaoremov = document.createElement("button");
+
 
     };
 
+
+
+
+    exibicao.innerHTML = "";
 
     }
 
