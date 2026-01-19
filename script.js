@@ -11,6 +11,8 @@ addtarefa.addEventListener("click", () =>{
     validarTarefa();
     adicionarTarefa();
     renderizarlista();
+    //removerTarefa();
+
 
     function adicionarTarefa() {
 
@@ -39,37 +41,79 @@ addtarefa.addEventListener("click", () =>{
 
     let exibicao = document.getElementById("tarefasatuais");
 
+    exibicao.innerHTML = "";
+
     for(const [indice, valor] of lista.entries())  {
+
+
 
         const div = document.createElement("div");
 
-        div.textContent = ("Minhas Tarefas");
+        div.classList.add("tarefa");
 
-        div.classList("tarefa");
+        div.dataset.index = indice;
+
+        
 
         const numeracao = document.createElement("p");
 
-        numeracao.textContent = (indice);
+        numeracao.textContent = indice;
 
-        data-index = indice;
+
+
 
         const exibirtarefa = document.createElement ("p");
 
-        exibirtarefa.textContent = (valor);
+        exibirtarefa.textContent = valor;
+
+
 
         const botaoremov = document.createElement("button");
 
+        botaoremov.textContent = ("Remover"); 
+     
 
+        div.appendChild(numeracao);
+        div.appendChild(exibirtarefa);
+        div.appendChild(botaoremov);
+        exibicao.appendChild(div);
+       
     };
 
 
 
+    
 
-    exibicao.innerHTML = "";
 
     }
 
+
+        const container = document.getElementById("tarefasatuais");
+        container.addEventListener("click", (remover) => {
+
+            const botao = remover.target.closest("button");
+            if(!botao) return;
+                
+            const tarefa = remover.target.closest(".tarefa");
+            if(!tarefa){
+
+                console.log("carai toma no cu");
+                return;
+
+            }
+
+            const tarefasel  = Number(tarefa.dataset.index);
+
+            lista.splice(tarefasel, 1);
+            renderizarlista();
+
+            });
+        
+
+
+
+    });
+
     
    
-});
 
