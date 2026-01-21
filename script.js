@@ -1,43 +1,40 @@
 lista = [];
 
 
-let addtarefa = document.getElementById("adicionar");
+document.addEventListener("DOMContentLoaded", () => {
+
+    let addtarefa = document.getElementById("adicionar");
+    const container = document.getElementById("tarefasatuais");
+
+    addtarefa.addEventListener("click", adicionarTarefa);
+    container.addEventListener("click", remover);
+});
 
 
-addtarefa.addEventListener("click", () =>{
 
-    let tarefa  = document.getElementById("novatarefa").value.trim();
+function adicionarTarefa() {
 
-    validarTarefa();
-    adicionarTarefa();
-    renderizarlista();
-    //removerTarefa();
+    let input  = document.getElementById("novatarefa");
+    let tarefa = input.value.trim();
 
 
-    function adicionarTarefa() {
-
-    console.log(tarefa);
+    if(!validarTarefa(tarefa)) return;
 
     lista.push(tarefa);
-    
-    console.log(lista);
+    input.value = "";
 
-    tarefa = ""; 
+    renderizarlista();
 
-    }
+ }
 
-    function validarTarefa() {
+function validarTarefa(tarefa) {
 
+   return tarefa !== "";
 
-    if(!tarefa === ""){
+};
+ 
 
-    return("!");
-    };
-
-
-    }   
-
-    function renderizarlista (){
+function renderizarlista (){
 
     let exibicao = document.getElementById("tarefasatuais");
 
@@ -85,20 +82,19 @@ addtarefa.addEventListener("click", () =>{
     
 
 
-    }
+}
 
+        
+ function remover(event) {
 
-        const container = document.getElementById("tarefasatuais");
-        container.addEventListener("click", (remover) => {
-
-            const botao = remover.target.closest("button");
+        const botao = event.target.closest("button");
             if(!botao) return;
                 
-            const tarefa = remover.target.closest(".tarefa");
+         const tarefa = event.target.closest(".tarefa");
             if(!tarefa){
 
-                console.log("carai toma no cu");
-                return;
+         console.log("carai toma no cu");
+             return;
 
             }
 
@@ -107,12 +103,12 @@ addtarefa.addEventListener("click", () =>{
             lista.splice(tarefasel, 1);
             renderizarlista();
 
-            });
+ };
         
 
 
 
-    });
+    
 
     
    
